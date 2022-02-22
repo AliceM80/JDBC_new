@@ -1,6 +1,8 @@
 package main.java;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class exercise1 {
@@ -12,9 +14,21 @@ public class exercise1 {
     String user = "temporaryadmin";
     String password = "";
 
+
     //"try with resources", connection will closed automatically
     try (Connection conn = DriverManager.getConnection(url, user, password)) {
-      System.out.println("Connection with database is successful");
+
+      String query = "SELECT datname FROM pg_database";
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(query);
+      List<String> datNames = new ArrayList<>();
+
+      while (rs.next()){
+        datNames.add(rs.getString("datname"));
+      }
+
+      System.out.println(datNames);
+
 
     } catch (SQLException ex) {
       System.err.println(ex.getMessage());
@@ -23,6 +37,22 @@ public class exercise1 {
   }
 }
 
+//Should be working as well
+  /*Connection conn = DriverManager.getConnection(url, user, password);
+  DatabaseMetaData metadata = conn.getMetaData();
+  ResultSet rs = metadata.getCatalogs();
+
+    while (rs.next()) {
+
+            String aDBName = rs.getString(1);
+            System.out.println(aDBName);
+            }
+
+            conn.close();
+
+            }
+
+            }*/
 
 //***Hint:***
 //- Download JDBC Driver library for PostgreqSQL
