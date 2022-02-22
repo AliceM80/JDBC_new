@@ -37,22 +37,6 @@ public class exercise1 {
   }
 }
 
-//Should be working as well
-  /*Connection conn = DriverManager.getConnection(url, user, password);
-  DatabaseMetaData metadata = conn.getMetaData();
-  ResultSet rs = metadata.getCatalogs();
-
-    while (rs.next()) {
-
-            String aDBName = rs.getString(1);
-            System.out.println(aDBName);
-            }
-
-            conn.close();
-
-            }
-
-            }*/
 
 //***Hint:***
 //- Download JDBC Driver library for PostgreqSQL
